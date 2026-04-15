@@ -1,59 +1,19 @@
-# Smieci
+# Wywóz śmieci · Mościska
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+A small offline-first PWA showing the next garbage pickup for **Mościska** (Gmina Izabelin) in 2026.
 
-## Development server
+- 📅 Next pickup highlighted at the top with the waste types being collected
+- 🔔 Configurable local reminders (default: day before at 11:00, 15:00 and 20:00) — fully client-side, no backend
+- 🌗 Light / dark / auto theme switch
+- 🌐 PL / EN language switch
+- 📱 Installable as a PWA, works fully offline once loaded
+- 🧪 "Test notification" button in Options to verify it works on your device
 
-To start a local development server, run:
+> Note: locally-scheduled notifications fire while the app/browser process is alive. For background delivery on iOS specifically install the app to the home screen first.
+## Support
 
-```bash
-ng serve
-```
+If you like this project and it helps you, I would really appreciate your support.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Maintaining open source takes time, and your support helps keep it alive and improving.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+<a href="https://buymeacoffee.com/tasior" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="48"></a>
