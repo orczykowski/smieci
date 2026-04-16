@@ -22,7 +22,7 @@ const DEFAULT_SETTINGS: Settings = {
   lang: 'pl',
   theme: 'auto',
   reminders: [
-    { id: 'r1', daysBefore: 1, hour: 16, minute: 0 },
+    { id: 'r1', daysBefore: 1, hour: 18, minute: 0 },
   ],
 };
 

@@ -197,6 +197,28 @@
 
 .cal-btn:active { transform: translateY(1px); }
 
+.cal-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--accent-default);
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0 2px 6px rgba(13, 78, 168, 0.18);
+  transition: transform 0.05s, box-shadow 0.15s, background 0.15s;
+}
+
+.cal-btn-primary:hover { background: color-mix(in srgb, var(--accent-default) 88%, black); }
+.cal-btn-primary:active { transform: translateY(1px); }
+
 .calendar-export {
   display: flex;
   flex-direction: column;

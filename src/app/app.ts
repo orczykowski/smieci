@@ -114,40 +114,10 @@ function nowStamp(): string {
 }
 
 
-const WARSAW_OFFSET = 1;
-
-function daysInMonth(year: number, month: number): number {
-  return new Date(Date.UTC(year, month, 0)).getUTCDate();
-}
-
-function alarmUtcStamp(pickupIso: string, r: Reminder): string {
-  const [py, pm, pd] = pickupIso.split('-').map(Number);
-
-  let aDay = pd - r.daysBefore;
-  let aMonth = pm;
-  let aYear = py;
-  while (aDay < 1) {
-    aMonth--;
-    if (aMonth < 1) { aMonth = 12; aYear--; }
-    aDay += daysInMonth(aYear, aMonth);
-  }
-
-  let utcHour = r.hour - WARSAW_OFFSET;
-  let utcDay = aDay;
-  let utcMonth = aMonth;
-  let utcYear = aYear;
-
-  if (utcHour < 0) {
-    utcHour += 24;
-    utcDay--;
-    if (utcDay < 1) {
-      utcMonth--;
-      if (utcMonth < 1) { utcMonth = 12; utcYear--; }
-      utcDay = daysInMonth(utcYear, utcMonth);
-    }
-  }
-
-  return `${utcYear}${pad2(utcMonth)}${pad2(utcDay)}T${pad2(utcHour)}${pad2(r.minute)}00Z`;
+function reminderTrigger(r: Reminder): string {
+  const minBefore = r.daysBefore * 1440 - (r.hour * 60 + r.minute);
+  if (minBefore <= 0) return `TRIGGER:PT${-minBefore}M`;
+  return `TRIGGER:-PT${minBefore}M`;
 }
 
 function buildIcs(schedule: PickupDay[], strings: Strings, reminders: Reminder[]): string {
@@ -161,7 +131,10 @@ function buildIcs(schedule: PickupDay[], strings: Strings, reminders: Reminder[]
     'X-WR-CALNAME:Wywóz śmieci · Mościska 2026',
     'X-WR-TIMEZONE:Europe/Warsaw',
   ];
-  for (const pickup of schedule) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todayMs = today.getTime();
+  for (const pickup of schedule.filter(p => parseDate(p.date).getTime() >= todayMs)) {
     const types = pickup.types
       .map(t => `${WASTE_TYPES[t].emoji} ${WASTE_TYPES[t].short}`)
       .join(', ');
@@ -182,7 +155,7 @@ function buildIcs(schedule: PickupDay[], strings: Strings, reminders: Reminder[]
         'BEGIN:VALARM',
         'ACTION:DISPLAY',
         `DESCRIPTION:${summary}`,
-        `TRIGGER;VALUE=DATE-TIME:${alarmUtcStamp(pickup.date, r)}`,
+        reminderTrigger(r),
         'END:VALARM',
       );
     }

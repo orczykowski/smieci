@@ -37,6 +37,13 @@
       </section>
     }
 
+    <section class="calendar-export">
+      <button class="cal-btn-primary" type="button" (click)="downloadCalendar()">
+        📅 {{ t().addToCalendar }}
+      </button>
+      <p class="muted small">{{ t().addToCalendarHint }}</p>
+    </section>
+
     @if (upcoming().length > 1) {
       <section class="upcoming">
         <h2>{{ t().upcoming }}</h2>
@@ -68,13 +75,6 @@
         </div>
       </section>
     }
-
-    <section class="calendar-export">
-      <button class="cal-btn" type="button" (click)="downloadCalendar()">
-        📅 {{ t().addToCalendar }}
-      </button>
-      <p class="muted small">{{ t().addToCalendarHint }}</p>
-    </section>
 
     <section class="full-schedule">
       <button class="ghost-btn full" type="button" (click)="togglePhoto()">
